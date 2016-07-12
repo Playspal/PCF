@@ -87,5 +87,10 @@ namespace com.playspal.core.ui
         {
             Screen.SetActive(value);
         }
+
+        public GameObject Find(string name)
+        {
+            return ScreenTransform.Find(name).gameObject;
+        }
 	}
 }
