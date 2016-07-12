@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using com.playspal.core.ui.tweens;
+
 namespace com.playspal.core.ui
 {
 	public class UiMenu : UiObject
@@ -15,14 +17,39 @@ namespace com.playspal.core.ui
 		public int LayerID = 0;
 		public int LayoutID = 0;
 
-		public virtual void Show()
-		{
-			
-		}
+        public void Show()
+        {
+            IsActive = true;
 
-		public virtual void Hide()
-		{
-			
-		}
+            Screen.SetActive(true);
+
+            TweenUiAlpha tween = new TweenUiAlpha(Screen, 0, 1, 0.25f);
+        }
+
+        public void Hide()
+        {
+            if (!IsActive)
+            {
+                return;
+            }
+
+            TweenUiAlpha tween = new TweenUiAlpha(Screen, 1, 0, 0.25f);
+
+            tween.OnComplete = (float value) =>
+            {
+                HideDirect();
+            };
+        }
+
+        public void HideDirect()
+        {
+            IsActive = false;
+
+            Screen.SetActive(false);
+        }
+
+        public virtual void Update()
+        {
+        }
 	}
 }
