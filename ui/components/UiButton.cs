@@ -13,7 +13,7 @@ namespace com.playspal.core.ui.components
         internal GameObject _normal;
 
         private float _lastClickTime = 0.0f;
-        private float _clickDelay = 1.0f;
+        private float _clickInterval = 1.0f;
 
         public bool IsEnabled = true;
 
@@ -43,6 +43,11 @@ namespace com.playspal.core.ui.components
             OnMouseOutHandler();
 
             IsEnabled = value;
+        }
+
+        public void SetClickInterval(float value)
+        {
+            _clickInterval = value;
         }
 
         private void OnMouseOverHandler()
@@ -76,7 +81,7 @@ namespace com.playspal.core.ui.components
                 return;
             }
 
-            if (Time.realtimeSinceStartup - _lastClickTime < _clickDelay)
+            if (Time.realtimeSinceStartup - _lastClickTime < _clickInterval)
             {
                 return;
             }
