@@ -5,12 +5,12 @@ using System.Collections;
 
 namespace com.playspal.core.ui.components
 {
-    public class UiButton
+    public class UiButton : UiObject
     {
-        internal GameObject _screen;
+        protected GameObject _screen;
 
-        internal GameObject _hover;
-        internal GameObject _normal;
+        protected GameObject _hover;
+        protected GameObject _normal;
 
         private float _lastClickTime = 0.0f;
         private float _clickInterval = 1.0f;
