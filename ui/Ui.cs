@@ -5,11 +5,44 @@ namespace com.playspal.core.ui
 {
 	public class Ui
 	{
-		public UiRoot UiRoot;
+        public UiMenu CurrentMenu = null;
 
-		public Ui()
-		{
-			UiRoot = new UiRoot();
-		}
+        public void SetActiveMenu(UiMenu menu)
+        {
+            if (CurrentMenu == menu && menu.IsActive)
+            {
+                return;
+            }
+
+            if (CurrentMenu != null)
+            {
+                CurrentMenu.Hide();
+            }
+
+            CurrentMenu = menu;
+            CurrentMenu.Show();
+        }
+
+        public void HideAll()
+        {
+            HideCurrent();
+        }
+
+        public void HideCurrent()
+        {
+            if (CurrentMenu != null)
+            {
+                CurrentMenu.Hide();
+                CurrentMenu = null;
+            }
+        }
+
+        public virtual void Update()
+        {
+            if (CurrentMenu != null)
+            {
+                CurrentMenu.Update();
+            }
+        }
 	}
 }
