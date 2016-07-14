@@ -90,7 +90,8 @@ namespace com.playspal.core.ui
 
         public GameObject Find(string name)
         {
-            return ScreenTransform.Find(name).gameObject;
+            Transform output = ScreenTransform.Find(name);            
+            return output == null ? null : output.gameObject;
         }
 	}
 }
