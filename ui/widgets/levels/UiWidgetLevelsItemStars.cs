@@ -15,6 +15,8 @@ namespace com.playspal.core.ui.widgets.levels
 			_star1 = new UiWidgetLevelsItemStar(Find("star1"));
 			_star2 = new UiWidgetLevelsItemStar(Find("star2"));
 			_star3 = new UiWidgetLevelsItemStar(Find("star3"));
+
+            SetStars(0);
 		}
 
 		public void SetStars(int value)

@@ -12,12 +12,14 @@ namespace com.playspal.core.ui.widgets.levels
         private UiButtonCaption _button;
         private GameObject _lockedIcon;
 
-        private int _itemID;
+        public int Index;
 
         public Action<int> OnClick;
 
         public UiWidgetLevelsItem(GameObject screen)
         {
+            SetScreen(screen);
+
             if(Find("stars") != null)
             {
                 _stars = new UiWidgetLevelsItemStars(Find("stars"));
@@ -27,11 +29,13 @@ namespace com.playspal.core.ui.widgets.levels
             _button.OnClick = OnClickHandler;
 
             _lockedIcon = Find("lockedIcon");
+
+            SetLocked(false);
         }
 
-        public void SetID(int value)
+        public void SetIndex(int value)
         {
-            _itemID = value;
+            Index = value;
         }
 
         public void SetCaption(string value)
@@ -60,7 +64,7 @@ namespace com.playspal.core.ui.widgets.levels
 
         private void OnClickHandler()
         {
-            OnClick.InvokeIfNotNull(_itemID);
+            OnClick.InvokeIfNotNull(Index);
         }
     }
 }

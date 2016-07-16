@@ -10,9 +10,12 @@ namespace com.playspal.core.ui.widgets.levels
     {
         private List<UiWidgetLevelsItem> _items = new List<UiWidgetLevelsItem>();
 
+        public int Length = 0;
+        public int Index = 0;
+
         public Action<int> OnClick;
         
-        public UiWidgetLevels(GameObject screen)
+        public UiWidgetLevels(GameObject screen, string path = "")
         {
             SetScreen(screen);
 
@@ -24,7 +27,7 @@ namespace com.playspal.core.ui.widgets.levels
 
             for(i = 0; i < 50; i++)
             {
-                gameObject = Find("b" + i);
+                gameObject = Find(path + "b" + i);
 
                 if(gameObject == null)
                 {
@@ -32,10 +35,46 @@ namespace com.playspal.core.ui.widgets.levels
                 }
 
                 item = new UiWidgetLevelsItem(gameObject);
-                item.SetID(n);
                 item.OnClick = OnItemClickHandler;
 
                 _items.Add(item);
+
+                n++;
+            }
+
+            SetupItems();
+        }
+
+        public void SetIndex(int value)
+        {
+            Index = value;
+            SetupItems();
+        }
+
+        public void SetLength(int value)
+        {
+            Length = value;
+            SetupItems();
+        }
+
+        private void SetupItems()
+        {
+            int n = 0;
+            int offset = _items.Count * Index;
+
+            foreach (UiWidgetLevelsItem item in _items)
+            {
+                if (n < Length)
+                {
+                    item.SetActive(true);
+                    item.SetIndex(offset + n);
+                    item.SetCaption((offset + n + 1).IntToLeadingZerosString(2));
+                }
+
+                else
+                {
+                    item.SetActive(false);
+                }
 
                 n++;
             }
