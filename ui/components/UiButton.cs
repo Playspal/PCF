@@ -7,8 +7,6 @@ namespace com.playspal.core.ui.components
 {
     public class UiButton : UiObject
     {
-        protected GameObject _screen;
-
         protected GameObject _hover;
         protected GameObject _normal;
 
@@ -21,21 +19,16 @@ namespace com.playspal.core.ui.components
 
         public UiButton(GameObject screen)
         {
-            _screen = screen;
+            SetScreen(screen);
 
-            _normal = screen.transform.Find("normal").gameObject;
-            _hover = screen.transform.Find("hover").gameObject;
+            _normal = Screen.transform.Find("normal").gameObject;
+            _hover = Screen.transform.Find("hover").gameObject;
 
-            UiEvents.AddMouseOverListener(screen, OnMouseOverHandler);
-            UiEvents.AddMouseOutListener(screen, OnMouseOutHandler);
-            UiEvents.AddClickListener(screen, OnClickHandler);
+            UiEvents.AddMouseOverListener(Screen, OnMouseOverHandler);
+            UiEvents.AddMouseOutListener(Screen, OnMouseOutHandler);
+            UiEvents.AddClickListener(Screen, OnClickHandler);
 
             OnMouseOutHandler();
-        }
-
-        public void SetActive(bool value)
-        {
-            _screen.SetActive(value);
         }
 
         public void SetEnabled(bool value)
