@@ -83,6 +83,15 @@ namespace com.playspal.core.ui
             ScreenTransform.anchoredPosition = new Vector3(x, y, 0);
         }
 
+        /// <summary>
+        /// Moves object out of screen bounds.
+        /// It's faster analogue of SetActive(false)
+        /// </summary>
+        public void SetPositionOutOfScreen()
+        {
+            SetPosition(20000, 20000);
+        }
+
         public void SetActive(bool value)
         {
             Screen.SetActive(value);
