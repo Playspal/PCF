@@ -7,7 +7,7 @@ namespace com.playspal.core.ui.widgets.paginator
     {
         private List<UiWidgetPaginatorItem> _items = new List<UiWidgetPaginatorItem>();
 
-        public UiWidgetPaginator(GameObject screen)
+        public UiWidgetPaginator(GameObject screen, string path = "")
         {
             SetScreen(screen);
 
@@ -19,7 +19,7 @@ namespace com.playspal.core.ui.widgets.paginator
 
             for (i = 0; i < 50; i++)
             {
-                gameObject = Find("p" + i);
+                gameObject = Find(path + "p" + i);
 
                 if (gameObject == null)
                 {
@@ -33,7 +33,7 @@ namespace com.playspal.core.ui.widgets.paginator
                 n++;
             }
 
-            SetLength(3);
+            SetLength(0);
             SetPage(0);
         }
 
@@ -54,7 +54,7 @@ namespace com.playspal.core.ui.widgets.paginator
 
             foreach (UiWidgetPaginatorItem item in _items)
             {
-                item.SetActive(n < value);
+                item.SetActive(n < value && value > 1);
                 n++;
             }
 
