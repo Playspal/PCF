@@ -1,54 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 namespace com.playspal.core.utils
 {
     public class Serialization
     {
-        public static string IntArrayToString(int[] array)
+        public static int[] StringToIntArray(string input)
         {
-            string output = "";
+            string[] items = input.Split(new string[] { "," }, StringSplitOptions.None);
 
             int i;
+            int[] output = new int[items.Length];
 
-            for (i = 0; i < array.Length;i++ )
+            for (i = 0; i < items.Length; i++)
             {
-                if(array[i] == 0)
+                if (string.IsNullOrEmpty(items[i]))
                 {
                     continue;
                 }
 
-                output += i + ":" + array[i] + ";";
-            }
-            Debug.LogError(output);
-            return output;
-        }
-
-        public static int[] StringToIntArray(string input, int length)
-        {
-            Debug.LogError(input);
-            int[] output = new int[length];
-
-            string[] items = input.Split(';');
-            string[] temp;
-
-            int i;
-            int key;
-            int value;
-
-            for(i = 0; i < items.Length; i++)
-            {
-                temp = items[i].Split(':');
-
-                if (temp == null || temp.Length != 2)
-                {
-                    continue;
-                }
-
-                key = int.Parse(temp[0]);
-                value = int.Parse(temp[1]);
-
-                output[key] = value;
+                output[i] = int.Parse(items[i]);
             }
 
             return output;
