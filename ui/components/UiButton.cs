@@ -3,6 +3,8 @@
 using System;
 using System.Collections;
 
+using com.playspal.core.utils.sound;
+
 namespace com.playspal.core.ui.components
 {
     public class UiButton : UiObject
@@ -12,6 +14,8 @@ namespace com.playspal.core.ui.components
 
         private float _lastClickTime = 0.0f;
         private float _clickInterval = 1.0f;
+
+        private string _clickSoundName;
 
         public bool IsEnabled = true;
 
@@ -29,6 +33,11 @@ namespace com.playspal.core.ui.components
             UiEvents.AddClickListener(Screen, OnClickHandler);
 
             OnMouseOutHandler();
+        }
+
+        public void SetClickSound(string value)
+        {
+            _clickSoundName = value;
         }
 
         public void SetEnabled(bool value)
@@ -77,6 +86,11 @@ namespace com.playspal.core.ui.components
             if (Time.realtimeSinceStartup - _lastClickTime < _clickInterval)
             {
                 return;
+            }
+
+            if (!string.IsNullOrEmpty(_clickSoundName))
+            {
+                Sound.Play(_clickSoundName);
             }
 
             _lastClickTime = Time.realtimeSinceStartup;
