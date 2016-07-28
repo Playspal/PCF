@@ -8,6 +8,7 @@ namespace com.playspal.core.ui
         public GameObject Screen;
         public RectTransform ScreenTransform;
 
+        public bool IsActive = true;
         public bool IsDestroyed = false;
 
         public void Destroy()
@@ -94,6 +95,7 @@ namespace com.playspal.core.ui
 
         public void SetActive(bool value)
         {
+            IsActive = value;
             Screen.SetActive(value);
         }
 
