@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace com.playspal.core.utils
 {
@@ -24,6 +26,27 @@ namespace com.playspal.core.utils
             }
 
             return output;
+        }
+
+        public static string ObjectToXML<T>(T input)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(input.GetType());
+
+            using (StringWriter textWriter = new StringWriter())
+            {
+                xmlSerializer.Serialize(textWriter, input);
+                return textWriter.ToString();
+            }
+        }
+
+        public static object XMLToObject(string objectData, Type type)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(type);
+
+            using (TextReader textReader = new StringReader(objectData))
+            {
+                return xmlSerializer.Deserialize(textReader);
+            }
         }
     }
 }
