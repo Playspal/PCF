@@ -19,6 +19,13 @@ namespace com.playspal.core.utils.sound
             _containerTransform = _container.transform;
         }
 
+        public static void SetEnabled(bool value)
+        {
+            Debug.LogError(value);
+            Enabled = value;
+            SetMuteAll(!value);
+        }
+
         public static void Play(string name, SoundOptions options = null)
         {
             if(!Enabled)
@@ -28,6 +35,32 @@ namespace com.playspal.core.utils.sound
 
             SoundItem item = GetItemOrCreateNew(name);
             item.Play(options);
+        }
+
+        public static void Stop(string name)
+        {
+            SoundItem item = GetItem(name);
+
+            if(item != null)
+            {
+                item.Stop();
+            }
+        }
+
+        public static void StopAll()
+        {
+            foreach (SoundItem item in _items)
+            {
+                item.Stop();
+            }
+        }
+
+        public static void SetMuteAll(bool value)
+        {
+            foreach (SoundItem item in _items)
+            {
+                item.SetMute(value);
+            }
         }
 
         private static SoundItem GetItemOrCreateNew(string name)

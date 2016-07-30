@@ -10,6 +10,8 @@ namespace com.playspal.core.utils.sound
         public AudioClip AudioClip;
         public AudioSource AudioSource;
 
+        public SoundOptions SoundOptions;
+
         public bool IsReadyToPlay
         {
             get
@@ -38,15 +40,30 @@ namespace com.playspal.core.utils.sound
             _containerTransform.SetParent(parent);
         }
 
+        public void SetMute(bool value)
+        {
+            AudioSource.mute = value;
+        }
+
         public void Play(SoundOptions options = null)
         {
             if (options != null)
             {
                 AudioSource.volume = options.Volume;
                 AudioSource.pitch = options.Pitch;
+                AudioSource.loop = options.Loop;
             }
+
+            SoundOptions = options;
 
             AudioSource.Play();
         }
+
+        public void Stop()
+        {
+            AudioSource.Stop();
+        }
+
+
     }
 }
