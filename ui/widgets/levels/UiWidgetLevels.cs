@@ -1,8 +1,10 @@
-﻿using System;
+﻿using UnityEngine;
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using UnityEngine;
+using com.playspal.core.storage;
 
 namespace com.playspal.core.ui.widgets.levels
 {
@@ -14,7 +16,7 @@ namespace com.playspal.core.ui.widgets.levels
         public int Index = 0;
 
         public Action<int> OnClick;
-        
+ 
         public UiWidgetLevels(GameObject screen, string path = "")
         {
             SetScreen(screen);
@@ -43,6 +45,20 @@ namespace com.playspal.core.ui.widgets.levels
             }
 
             SetupItems();
+        }
+
+        public void SetDataFromStorage()
+        {
+            SetData(Core.Storage.Levels.Items);
+        }
+
+        public void SetData(StorageLevel[] data)
+        {
+            foreach (UiWidgetLevelsItem item in _items)
+            {
+                item.SetLocked(!(item.Index == 0 || data[item.Index - 1].Completed));
+                item.SetStars(data[item.Index].StarsEarned);
+            }
         }
 
         public void SetIndex(int value)

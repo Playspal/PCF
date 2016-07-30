@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using com.playspal.core.utils.helpers;
+using com.playspal.core.storage;
 
 namespace com.playspal.core.ui.widgets.levels
 {
@@ -46,6 +47,22 @@ namespace com.playspal.core.ui.widgets.levels
             }
         }
 
+        public void SetDataFromStorage()
+        {
+            foreach (UiWidgetLevels block in Blocks)
+            {
+                block.SetDataFromStorage();
+            }
+        }
+
+        public void SetData(StorageLevel[] data)
+        {
+            foreach (UiWidgetLevels block in Blocks)
+            {
+                block.SetData(data);
+            }
+        }
+
         public List<UiObject> GetBlocksAsUiObjects()
         {
             List<UiObject> output = new List<UiObject>();
@@ -67,7 +84,7 @@ namespace com.playspal.core.ui.widgets.levels
             );
 
             int length = Mathf.Min(_itemsPerBlock, _itemsTotal - Blocks.Count * _itemsPerBlock);
-            Debug.LogError(length + " / " + _itemsPerBlock);
+            
             block.SetIndex(Blocks.Count);
             block.SetLength(length);
             block.OnClick = OnBlockClickHandler;

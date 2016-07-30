@@ -45,11 +45,6 @@ namespace com.playspal.core.ui.widgets.levels
 
         public void SetLocked(bool value)
         {
-            if(_stars != null)
-            {
-                _stars.SetActive(!value);   
-            }
-
             _lockedIcon.SetActive(value);
             _button.SetActive(!value);
         }
