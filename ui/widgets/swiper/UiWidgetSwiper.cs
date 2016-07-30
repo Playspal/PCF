@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 using com.playspal.core.utils.helpers;
 using com.playspal.core.ui.widgets.levels;
+using com.playspal.core.utils.sound;
 
 namespace com.playspal.core.ui.widgets.swiper
 {
@@ -25,6 +26,8 @@ namespace com.playspal.core.ui.widgets.swiper
         private float _containerCurrentPosition = 0f;
 
         private int _pageCurrent = 0;
+
+        private string _swipeSoundName;
 
         public Action<int> OnPageChanged;
 
@@ -46,7 +49,12 @@ namespace com.playspal.core.ui.widgets.swiper
             _container.anchoredPosition = Vector2.zero;
         }
 
-        public void AddChildsGroup(List<UiObject> childs)
+        public void SetSwipeSound(string value)
+        {
+            _swipeSoundName = value;
+        }
+
+        public void AddChilds(List<UiObject> childs)
         {
             foreach(UiObject child in childs)
             {
@@ -122,6 +130,8 @@ namespace com.playspal.core.ui.widgets.swiper
             _isSwipeInProgress = true;
 
             _containerTargetPosition = UiRoot.DefinedScreenWidth;
+
+            SwipeSound();
         }
 
         private void SwipeLeft()
@@ -137,6 +147,21 @@ namespace com.playspal.core.ui.widgets.swiper
             _isSwipeInProgress = true;
 
             _containerTargetPosition = -UiRoot.DefinedScreenWidth;
+
+            SwipeSound();
+        }
+
+        private void SwipeSound()
+        {
+            if (!string.IsNullOrEmpty(_swipeSoundName))
+            {
+                Sound.Play(_swipeSoundName);
+            }
+
+            else if (!string.IsNullOrEmpty(UiSettings.DefaultSwipeSound))
+            {
+                Sound.Play(UiSettings.DefaultSwipeSound);
+            }
         }
 
         public void Update()

@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 
+using com.playspal.core.ui;
 using com.playspal.core.utils.sound;
 
 namespace com.playspal.core.ui.components
@@ -91,6 +92,11 @@ namespace com.playspal.core.ui.components
             if (!string.IsNullOrEmpty(_clickSoundName))
             {
                 Sound.Play(_clickSoundName);
+            }
+
+            else if (!string.IsNullOrEmpty(UiSettings.DefaultClickSound))
+            {
+                Sound.Play(UiSettings.DefaultClickSound);
             }
 
             _lastClickTime = Time.realtimeSinceStartup;
