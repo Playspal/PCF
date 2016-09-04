@@ -17,7 +17,7 @@ namespace com.playspal.core.ui
 		public int LayerID = 0;
 		public int LayoutID = 0;
 
-        public void Show()
+        public virtual void Show()
         {
             IsActive = true;
 
@@ -26,7 +26,7 @@ namespace com.playspal.core.ui
             TweenUiAlpha tween = new TweenUiAlpha(Screen, 0, 1, 0.25f);
         }
 
-        public void Hide()
+        public virtual void Hide()
         {
             if (!IsActive)
             {
@@ -41,7 +41,7 @@ namespace com.playspal.core.ui
             };
         }
 
-        public void HideDirect()
+        public virtual void HideDirect()
         {
             IsActive = false;
 
