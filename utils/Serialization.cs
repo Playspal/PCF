@@ -8,6 +8,20 @@ namespace com.playspal.core.utils
 {
     public class Serialization
     {
+        public static string IntArrayToString(int[] input)
+        {
+            int i;
+            string output = "";
+
+            for(i = 0; i < input.Length; i++)
+            {
+                output += i > 0 ? "," : "";
+                output += input[i];
+            }
+
+            return output;
+        }
+
         public static int[] StringToIntArray(string input)
         {
             string[] items = input.Split(new string[] { "," }, StringSplitOptions.None);
