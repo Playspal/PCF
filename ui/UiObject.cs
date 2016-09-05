@@ -11,6 +11,9 @@ namespace com.playspal.core.ui
         public bool IsActive = true;
         public bool IsDestroyed = false;
 
+        public float X { get { return ScreenTransform.anchoredPosition.x; } }
+        public float Y { get { return ScreenTransform.anchoredPosition.y; } }
+
         public void Destroy()
         {
             IsDestroyed = true;
