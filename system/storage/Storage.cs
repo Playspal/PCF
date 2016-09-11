@@ -14,10 +14,12 @@ namespace com.playspal.core.storage
     {
         public int Score = 0;
         public StorageLevels Levels;
+        public StorageCommodities Commodities;
 
         public Storage()
         {
-            Levels = new StorageLevels();  
+            Levels = new StorageLevels();
+            Commodities = new StorageCommodities();
         }
 
         public void Save()

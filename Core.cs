@@ -16,8 +16,6 @@ namespace com.playspal.core
         static Core()
         {
             Storage = Storage.Load();
-            //Storage.Save(Storage);
-            //Storage = Storage.Load();
         }
 
         public static void Update()
