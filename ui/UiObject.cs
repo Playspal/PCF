@@ -14,6 +14,9 @@ namespace com.playspal.core.ui
         public float X { get { return ScreenTransform.anchoredPosition.x; } }
         public float Y { get { return ScreenTransform.anchoredPosition.y; } }
 
+        public float Width { get { return ScreenTransform.sizeDelta.x; } }
+        public float Height { get { return ScreenTransform.sizeDelta.y; } }
+
         public void Destroy()
         {
             IsDestroyed = true;
