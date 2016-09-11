@@ -8,10 +8,15 @@ namespace com.playspal.core.storage
     {
         public List<StorageCommodity> Items = new List<StorageCommodity>();
 
-        public void Setup(string name, float valueDefault, float valueMax, float refillDelay)
+        public void Setup(string name, float valueDefault, float valueMax, int refillDelay)
         {
-            if(GetByName(name) != null)
+            StorageCommodity item = GetByName(name);
+
+            if (item != null)
             {
+                item.ValueMaximum = valueMax;
+                item.RefillDelay = refillDelay;
+
                 return;
             }
 
@@ -40,6 +45,14 @@ namespace com.playspal.core.storage
             }
 
             return null;
+        }
+
+        public void Refill()
+        {
+            foreach (StorageCommodity item in Items)
+            {
+                item.Refill();
+            }
         }
     }
 }

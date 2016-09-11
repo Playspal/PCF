@@ -21,6 +21,8 @@ namespace com.playspal.core
         public static void Update()
         {
             DefferedMethods.Process();
+
+            Storage.Commodities.Refill();
         }
     }
 }
