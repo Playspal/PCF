@@ -8,8 +8,6 @@ namespace com.playspal.core.ui
 {
     public class UiPopup : UiObject
     {
-        public static int PopupsShown = 0;
-
         public GameObject Content;
         public RectTransform ContentTransform;
 
@@ -28,7 +26,7 @@ namespace com.playspal.core.ui
 
         public void Show()
         {
-            PopupsShown++;
+            UiPopupsManager.Add(this);
 
             TweenUiAlpha tweenAlpha = new TweenUiAlpha(Screen, 0, 1, 0.25f);
             TweenUiScale tweenScale = new TweenUiScale(Content, 0.95f, 1.0f, 0.25f);
@@ -46,13 +44,12 @@ namespace com.playspal.core.ui
 
         public void Hide()
         {
-            PopupsShown--;
-
             TweenUiAlpha tweenAlpha = new TweenUiAlpha(Screen, 1, 0, 0.25f);
             TweenUiScale tweenScale = new TweenUiScale(Content, 1.0f, 0.95f, 0.25f);
 
             tweenAlpha.OnComplete = delegate(float value)
             {
+                UiPopupsManager.Remove(this);
                 Destroy();
             };
         }
