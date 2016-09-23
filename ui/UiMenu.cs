@@ -8,7 +8,7 @@ namespace com.playspal.core.ui
 	public class UiMenu : UiObject
 	{
 		// Is menu active and visible now
-		public bool IsActive = false;
+		public bool IsVisible = false;
 
 		// If true, menu don't will be autohided
 		// Great to headers, backgrounds etc
@@ -19,7 +19,7 @@ namespace com.playspal.core.ui
 
         public virtual void Show()
         {
-            IsActive = true;
+            IsVisible = true;
 
             Screen.SetActive(true);
 
@@ -28,7 +28,7 @@ namespace com.playspal.core.ui
 
         public virtual void Hide()
         {
-            if (!IsActive)
+            if (!IsVisible)
             {
                 return;
             }
@@ -43,7 +43,7 @@ namespace com.playspal.core.ui
 
         public virtual void HideDirect()
         {
-            IsActive = false;
+            IsVisible = false;
 
             Screen.SetActive(false);
         }
