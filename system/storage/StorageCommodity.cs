@@ -70,7 +70,7 @@ namespace com.playspal.core.storage
             Value -= value;
             Value = Value < 0 ? 0 : Value;
 
-            if(RefillDelay > 0)
+            if(RefillDelay > 0 && RefillTimeLeft <= 0)
             {
                 RefillTime = TimeHelper.GetUnixTimestamp();
             }
