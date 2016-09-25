@@ -14,7 +14,7 @@ namespace com.playspal.core.ui.components
         protected GameObject _normal;
 
         private float _lastClickTime = 0.0f;
-        private float _clickInterval = 1.0f;
+        private float _clickInterval = 0.1f;
 
         private string _clickSoundName;
 

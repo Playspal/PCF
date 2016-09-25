@@ -32,6 +32,14 @@ namespace com.playspal.core.ui
             }
         }
 
+        public static float ScaleFactor
+        {
+            get
+            {
+                return GameObject.Find("Canvas").GetComponent<Canvas>().scaleFactor;
+            }
+        }
+
         public static RectTransform GetLayer(int n)
         {
             return GameObject.Find("Canvas/layer" + n).GetComponent<RectTransform>();
