@@ -29,7 +29,7 @@ namespace com.playspal.core.storage
 
         public static void Save(Storage storage)
         {
-            string filepath = Application.dataPath + "/storage.dat";
+            string filepath = Application.persistentDataPath + "/storage.dat";
             string xml = Serialization.ObjectToXML(storage);
 
             File.WriteAllText(filepath, xml);
