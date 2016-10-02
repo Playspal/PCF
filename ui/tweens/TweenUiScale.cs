@@ -18,7 +18,10 @@ namespace com.playspal.core.ui.tweens
 
         private void OnTickHandler(float value)
         {
-            _rectTransform.localScale = new Vector3(value, value, 1);
+            if (_rectTransform != null)
+            {
+                _rectTransform.localScale = new Vector3(value, value, 1);
+            }
         }
     }
 }

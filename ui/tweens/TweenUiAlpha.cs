@@ -21,7 +21,10 @@ namespace com.playspal.core.ui.tweens
 
         private void OnTickHandler(float value)
         {
-            _canvasGroup.alpha = value;
+            if (_canvasGroup != null)
+            {
+                _canvasGroup.alpha = value;
+            }
         }
     }
 }

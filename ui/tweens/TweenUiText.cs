@@ -12,26 +12,36 @@ namespace com.playspal.core.ui.tweens
         private string _message;
 
         private bool _splitByWords = false;
+        private string[] _words;
 
         public TweenUiText(GameObject screen, string message, bool splitByWords, float time)
         {
             _message = message;
+            
             _splitByWords = splitByWords;
+            _words = _splitByWords ? message.Split(' ') : null;
 
             _text = screen.GetComponent<Text>();
             _text.supportRichText = true;
-            
-            OnTick = OnTickHandler;
 
-            Run(0, 1, time);
+            if(splitByWords)
+            {
+                OnTick = OnTickHandlerWords;
+            }
+
+            else
+            {
+                OnTick = OnTickHandlerLetters;
+            }            
+
+            Run(0, 1, splitByWords ? time * _words.Length : time * _message.Length);
         }
 
-        private void OnTickHandler(float value)
+        private void OnTickHandlerLetters(float value)
         {
-            int index = (int)((float)_message.Length * value);
-            int position = _splitByWords ? _message.IndexOf(' ', index) : index;
-
             string output = "";
+
+            int position = (int)((float)_message.Length * value);
 
             if (value < 1)
             {
@@ -45,7 +55,28 @@ namespace com.playspal.core.ui.tweens
                 output = _message;
             }
 
-            _text.text = output;
+            if (_text != null)
+            {
+                _text.text = output;
+            }
+        }
+
+        private void OnTickHandlerWords(float value)
+        {
+            string output = "";
+
+            float position = Mathf.Floor(_words.Length * value);
+
+            for (int i = 0; i < _words.Length; i++)
+            {
+                output += string.IsNullOrEmpty(output) ? "" : " ";
+                output += i <= position ? _words[i] : "<color=#FFFFFF00>" + _words[i] + "</color>";
+            }
+
+            if (_text != null)
+            {
+                _text.text = output;
+            }
         }
     }
 }

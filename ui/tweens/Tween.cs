@@ -61,7 +61,7 @@ namespace com.playspal.core.ui.tweens
                 _valueCurrent -= step;
             }
 
-            if (Mathf.Abs(_valueCurrent - _valueTarget) > _valueDelta * 0.1f)
+            if (Mathf.Abs(_valueCurrent - _valueTarget) > step)
             {
                 OnTick.InvokeIfNotNull(_valueCurrent);
             }

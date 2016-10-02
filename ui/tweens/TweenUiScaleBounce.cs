@@ -28,7 +28,10 @@ namespace com.playspal.core.ui.tweens
             float e = 2.718281828459045f;
             float scale = -1 * Mathf.Pow(e, -value / _amplitude) * Mathf.Cos(_frequency * value) + 1;
 
-            _rectTransform.localScale = new Vector3(scale, scale, 1);
+            if (_rectTransform != null)
+            {
+                _rectTransform.localScale = new Vector3(scale, scale, 1);
+            }
         }
     }
 }
