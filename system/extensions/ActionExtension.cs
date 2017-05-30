@@ -17,4 +17,14 @@ public static class ActionExtensions
             action();
         }
     }
+
+    public static T InvokeIfNotNull<T>(this Func<T> action)
+    {
+        if (action != null)
+        {
+            return action();
+        }
+
+        return default(T);
+    }
 }
