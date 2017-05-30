@@ -9,6 +9,30 @@ namespace com.playspal.core.essences
         protected GameObject _model;
         protected Transform _modelTransform;
 
+        public float X
+        {
+            get
+            {
+                return _modelTransform.localPosition.x;
+            }
+        }
+
+        public float Y
+        {
+            get
+            {
+                return _modelTransform.localPosition.y;
+            }
+        }
+
+        public float Z
+        {
+            get
+            {
+                return _modelTransform.localPosition.z;
+            }
+        }
+
         public Transform Parent
         {
             get
@@ -53,7 +77,7 @@ namespace com.playspal.core.essences
 
         public virtual void SetPosition(float x, float y)
         {
-            _modelTransform.localPosition = new Vector3(x, y, _modelTransform.localPosition.z);
+            _modelTransform.localPosition = new Vector3(x, y, Z);
         }
 
         public virtual void SetPosition(float x, float y, float z)
@@ -61,9 +85,14 @@ namespace com.playspal.core.essences
             _modelTransform.localPosition = new Vector3(x, y, z);
         }
 
+        public virtual void SetRotation(float value)
+        {
+            _modelTransform.localRotation = Quaternion.Euler(0, 0, value);
+        }
+
         public virtual void SetDepth(float value)
         {
-            _modelTransform.localPosition = new Vector3(_modelTransform.localPosition.x, _modelTransform.localPosition.y, value);
+            _modelTransform.localPosition = new Vector3(X, Y, value);
         }
 
         public virtual void SetScale(float value)
