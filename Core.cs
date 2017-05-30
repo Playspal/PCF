@@ -8,7 +8,13 @@ namespace com.playspal.core
 {
     public class Core
     {
-        public static float DeltaSecondsFixed = 1f / 30f;
+        public static float DeltaTime
+        {
+            get
+            {
+                return Mathf.Min(Time.deltaTime, 0.02f);
+            }
+        }
 
         public static Storage Storage;
 
