@@ -5,13 +5,15 @@ using System.IO;
 using System.Collections;
 
 using com.playspal.core.utils;
-using System.Text;
+using com.playspal.core.utils.helpers;
 
 namespace com.playspal.core.storage
 {
     [Serializable]
     public class Storage
     {
+        public const string STORAGE_FILE_NAME = "storage.dat";
+
         public int Score = 0;
         public StorageLevels Levels;
         public StorageCommodities Commodities;
@@ -29,25 +31,15 @@ namespace com.playspal.core.storage
 
         public static void Save(Storage storage)
         {
-            string filepath = "";
-
-            if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-            {
-                filepath = Application.persistentDataPath + "/storage.dat";
-            }
-            else
-            {
-                filepath = Application.dataPath + "/storage.dat";
-            }
-
             string xml = Serialization.ObjectToXML(storage);
+            string filepath = UnityFileSystemHelper.RootDirectory + STORAGE_FILE_NAME;
 
             File.WriteAllText(filepath, xml);
         }
 
         public static Storage Load()
         {
-            string filepath = Application.dataPath + "/storage.dat";
+            string filepath = UnityFileSystemHelper.RootDirectory + STORAGE_FILE_NAME;
 
             if (File.Exists(filepath))
             {
