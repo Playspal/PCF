@@ -3,7 +3,6 @@ using System.Collections;
 
 using com.playspal.core.system.services.deffered;
 using com.playspal.core.storage;
-using com.playspal.core.utils.sound;
 
 namespace com.playspal.core
 {
@@ -15,6 +14,10 @@ namespace com.playspal.core
 
         static Core()
         {
+        }
+
+        public static void Initialization()
+        { 
             Storage = Storage.Load();
         }
 
