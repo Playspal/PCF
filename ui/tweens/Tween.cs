@@ -46,7 +46,7 @@ namespace com.playspal.core.ui.tweens
 
         private void Process()
         {
-            float elapsed = Core.DeltaSecondsFixed;
+            float elapsed = Core.DeltaTime;
 
             float timeDelta = elapsed / _time;
             float step = _valueDelta * timeDelta;
