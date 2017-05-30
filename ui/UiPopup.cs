@@ -53,5 +53,11 @@ namespace com.playspal.core.ui
                 Destroy();
             };
         }
+
+        public void HideDirect()
+        {
+            UiPopupsManager.Remove(this);
+            Destroy();
+        }
     }
 }
