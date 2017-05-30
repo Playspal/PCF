@@ -11,7 +11,8 @@ namespace com.playspal.core.utils.sound
 
         private static List<SoundItem> _items = new List<SoundItem>();
 
-        public static bool Enabled = true;
+        public static bool IsEnabledSound = true;
+        public static bool IsEnabledMusic = true;
 
         static Sound()
         {
@@ -19,27 +20,43 @@ namespace com.playspal.core.utils.sound
             _containerTransform = _container.transform;
         }
 
-        public static void SetEnabled(bool value)
+        public static void SetSoundEnabled(bool value)
         {
-            Debug.LogError(value);
-            Enabled = value;
-            SetMuteAll(!value);
+            IsEnabledSound = value;
+            SetMuteSound(!value);
+        }
+
+        public static void SetMusicEnabled(bool value)
+        {
+            IsEnabledMusic = value;
+            SetMuteMusic(!value);
         }
 
         public static void Play(string name, SoundOptions options = null)
         {
-            if(!Enabled)
+            if(!IsEnabledSound)
             {
                 return;
             }
 
-            SoundItem item = GetItemOrCreateNew(name);
+            SoundItem item = GetItemOrCreateNew(name, false);
+            item.Play(options);
+        }
+
+        public static void PlayMusic(string name, SoundOptions options = null)
+        {
+            if (!IsEnabledMusic)
+            {
+                return;
+            }
+
+            SoundItem item = GetItemOrCreateNew(name, true);
             item.Play(options);
         }
 
         public static void Stop(string name)
         {
-            SoundItem item = GetItem(name);
+            SoundItem item = GetItemDirect(name);
 
             if(item != null)
             {
@@ -55,41 +72,57 @@ namespace com.playspal.core.utils.sound
             }
         }
 
-        public static void SetMuteAll(bool value)
+        public static void SetMuteSound(bool value)
+        {
+            SetMute(value, null);
+        }
+
+        public static void SetMuteMusic(bool value)
+        {
+            SetMute(null, value);
+        }
+
+        private static void SetMute(bool? sound, bool? music)
         {
             foreach (SoundItem item in _items)
             {
-                item.SetMute(value);
-            }
-        }
-
-        private static SoundItem GetItemOrCreateNew(string name)
-        {
-            SoundItem output = GetItem(name);
-            output = output != null ? output : CreateItem(name);
-
-            return output;
-        }
-
-        private static SoundItem GetItem(string name)
-        {
-            SoundItem output = null;
-
-            foreach(SoundItem item in _items)
-            {
-                if (item.Name == name && item.IsReadyToPlay)
+                if (item.IsMusic && music != null)
                 {
-                    output = item;
+                    item.SetMute((bool)music);
+                }
+
+                if (!item.IsMusic && sound != null)
+                {
+                    item.SetMute((bool)sound);
                 }
             }
+        }
+
+        private static SoundItem GetItemOrCreateNew(string name, bool isMusic)
+        {
+            SoundItem output = GetItemFromPool(name);
+
+            output = output != null ? output : CreateItem(name, isMusic);
 
             return output;
         }
 
-        private static SoundItem CreateItem(string name)
+        private static SoundItem GetItemFromPool(string name)
+        {
+            return _items.Find(x => x.Name == name && x.IsReadyToPlay);
+        }
+
+        private static SoundItem GetItemDirect(string name)
+        {
+            return _items.Find(x => x.Name == name);
+        }
+
+        private static SoundItem CreateItem(string name, bool isMusic)
         {
             SoundItem item = new SoundItem(name);
+
             item.SetParent(_containerTransform);
+            item.IsMusic = isMusic;
 
             _items.Add(item);
 

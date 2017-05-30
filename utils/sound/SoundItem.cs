@@ -12,6 +12,8 @@ namespace com.playspal.core.utils.sound
 
         public SoundOptions SoundOptions;
 
+        public bool IsMusic = false;
+
         public bool IsReadyToPlay
         {
             get
