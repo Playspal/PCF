@@ -34,7 +34,7 @@ namespace com.playspal.core.system.services.deffered
 
             for (i = 0; i < _itemsLength; i++)
             {
-                if (_items[i].Execute() == false)
+                if (_items[i].Execute() == DefferedMethodState.Alive)
                 {
                     temp[tempLength] = _items[i];
                     tempLength++;

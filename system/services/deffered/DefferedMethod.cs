@@ -1,35 +1,51 @@
 ﻿using System;
-using System.Collections;
 
 namespace com.playspal.core.system.services.deffered
 {
     public class DefferedMethod
     {
-        private int _timer = 0;
-        private Action _callback = null;
+        public static readonly bool STOP = true;
+        public static readonly bool NEXT = false;
 
-        public DefferedMethod(Action callback, int timer = 0)
+        protected float _delay;
+        protected float _delayDefined;
+
+        protected DefferedMethodType _type;
+
+        private Action _callback;
+
+        public DefferedMethod() { }
+
+        public DefferedMethod(Action callback, float timer = 0, DefferedMethodType type = DefferedMethodType.DelayFrames)
         {
             _callback = callback;
-            _timer = timer;
+
+            Initialization(timer, type);
+        }
+
+        protected void Initialization(float timer, DefferedMethodType type)
+        {
+            _delayDefined = timer;
+            _delay = timer;
+            _type = type;
 
             DefferedMethods.Register(this);
         }
 
-        public bool Execute()
+        public virtual DefferedMethodState Execute()
         {
-            if (_timer <= 0)
+            if (_delay <= 0)
             {
                 _callback.InvokeIfNotNull();
 
-                return true;
+                return DefferedMethodState.Closed;
             }
 
             else
             {
-                _timer--;
+                _delay -= _type == DefferedMethodType.DelayFrames ? 1 : Core.DeltaTime;
 
-                return false;
+                return DefferedMethodState.Alive;
             }
         }
     }
