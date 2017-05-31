@@ -22,9 +22,10 @@ namespace com.playspal.core.ui.components
 
         public Action OnClick = null;
 
-        public UiButton(GameObject screen)
+        public UiButton(GameObject screen, Action onClick = null)
         {
             SetScreen(screen);
+            OnClick = onClick;
 
             _normal = Screen.transform.Find("normal").gameObject;
             _hover = Screen.transform.Find("hover").gameObject;

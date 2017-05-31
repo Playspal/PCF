@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace com.playspal.core.ui.components
@@ -7,9 +9,14 @@ namespace com.playspal.core.ui.components
     {
         protected Text _caption;
 
-        public UiButtonCaption(GameObject screen) : base(screen)
+        public UiButtonCaption(GameObject screen, string caption = "", Action onClick = null) : base(screen, onClick)
         {
             _caption = Find("caption").GetComponent<Text>();
+
+            if(!string.IsNullOrEmpty(caption))
+            {
+                SetCaption(caption);
+            }
         }
 
         public void SetCaption(string value)
