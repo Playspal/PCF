@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 namespace com.playspal.core.ui
@@ -109,6 +110,11 @@ namespace com.playspal.core.ui
         {
             Transform output = ScreenTransform.Find(name);            
             return output == null ? null : output.gameObject;
+        }
+
+        public Text FindText(string name)
+        {
+            return Find(name).GetComponent<Text>();
         }
 	}
 }
