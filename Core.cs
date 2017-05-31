@@ -16,6 +16,14 @@ namespace com.playspal.core
             }
         }
 
+        public static float Fps
+        {
+            get
+            {
+                return CoreFps.Value;
+            }
+        }
+
         public static Storage Storage;
 
         static Core()
@@ -30,6 +38,7 @@ namespace com.playspal.core
         public static void Update()
         {
             DefferedMethods.Process();
+            CoreFps.Update();
 
             Storage.Commodities.Refill();
         }
