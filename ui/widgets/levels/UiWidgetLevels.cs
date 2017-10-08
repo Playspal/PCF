@@ -84,7 +84,7 @@ namespace com.playspal.core.ui.widgets.levels
                 {
                     item.SetActive(true);
                     item.SetIndex(offset + n);
-                    item.SetCaption((offset + n + 1).IntToLeadingZerosString(2));
+                    item.SetCaption((offset + n + 1).ToLeadingZerosString(2));
                 }
 
                 else

@@ -23,9 +23,9 @@ namespace com.playspal.core.utils.helpers
 
             seconds -= minutes * 60;
 
-            output += minutes.FloatToLeadingZerosString(2);
+            output += minutes.ToLeadingZerosString(2);
             output += ":";
-            output += seconds.FloatToLeadingZerosString(2);
+            output += seconds.ToLeadingZerosString(2);
 
             return output;
         }
@@ -43,11 +43,11 @@ namespace com.playspal.core.utils.helpers
             seconds -= minutes * 60;
             minutes -= hours * 60;
 
-            output += hours.FloatToLeadingZerosString(2);
+            output += hours.ToLeadingZerosString(2);
             output += ":";
-            output += minutes.FloatToLeadingZerosString(2);
+            output += minutes.ToLeadingZerosString(2);
             output += ":";
-            output += seconds.FloatToLeadingZerosString(2);
+            output += seconds.ToLeadingZerosString(2);
 
             return output;
         }
