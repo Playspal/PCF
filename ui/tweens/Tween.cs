@@ -68,24 +68,23 @@ namespace com.playspal.core.ui.tweens
 
             else
             {
-                if (!Loop)
-                {
-                    OnTick.InvokeIfNotNull(_valueTarget);
-                    OnComplete.InvokeIfNotNull(_valueTarget);
-
-                    return;
-                }
-                else
+                if (Loop)
                 {
                     if(_valueTarget == _definedValue1)
                     {
                         _valueTarget = _definedValue2;
                     }
-
                     else
                     {
                         _valueTarget = _definedValue1;
                     }
+                }
+                else
+                {
+                    OnTick.InvokeIfNotNull(_valueTarget);
+                    OnComplete.InvokeIfNotNull(_valueTarget);
+
+                    return;
                 }
             }
 

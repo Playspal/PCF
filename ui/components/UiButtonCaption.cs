@@ -8,12 +8,16 @@ namespace com.playspal.core.ui.components
     public class UiButtonCaption : UiButton
     {
         protected Text _caption;
+        protected Text _captionNormal;
+        protected Text _captionHover;
 
         public UiButtonCaption(GameObject screen, string caption = "", Action onClick = null) : base(screen, onClick)
         {
-            _caption = Find("caption").GetComponent<Text>();
+            _caption = FindText("caption");
+            _captionNormal = FindText("normal/caption");
+            _captionHover = FindText("hover/caption");
 
-            if(!string.IsNullOrEmpty(caption))
+            if (!string.IsNullOrEmpty(caption))
             {
                 SetCaption(caption);
             }
@@ -21,7 +25,20 @@ namespace com.playspal.core.ui.components
 
         public void SetCaption(string value)
         {
-            _caption.text = value.ToUpper();
+            if (_caption != null)
+            {
+                _caption.text = value;
+            }
+
+            if (_captionNormal != null)
+            {
+                _captionNormal.text = value;
+            }
+
+            if (_captionHover != null)
+            {
+                _captionHover.text = value;
+            }
         }
     }
 }
