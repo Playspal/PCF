@@ -25,6 +25,7 @@
     public static void CacheSave(this string value, string id)
     {
         UnityEngine.PlayerPrefs.SetString(id, value);
+        UnityEngine.PlayerPrefs.Save();
     }
 
     /// <summary>

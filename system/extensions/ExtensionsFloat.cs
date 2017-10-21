@@ -29,6 +29,7 @@ public static class ExtensionsFloat
     public static void CacheSave(this float value, string id)
     {
         UnityEngine.PlayerPrefs.SetFloat(id, value);
+        UnityEngine.PlayerPrefs.Save();
     }
 
     /// <summary>

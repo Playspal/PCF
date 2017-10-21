@@ -33,6 +33,7 @@ public static class ExtensionsInt
     public static void CacheSave(this int value, string id)
     {
         UnityEngine.PlayerPrefs.SetInt(id, value);
+        UnityEngine.PlayerPrefs.Save();
     }
 
     /// <summary>
