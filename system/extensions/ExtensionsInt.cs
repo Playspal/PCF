@@ -25,4 +25,23 @@ public static class ExtensionsInt
 
         return stringBuilder.ToString();
     }
+
+    /// <summary>
+    /// Puts variable's value to Unity PlayerPrefs
+    /// </summary>
+    /// <param name="id">Unique Id of variable</param>
+    public static void CacheSave(this int value, string id)
+    {
+        UnityEngine.PlayerPrefs.SetInt(id, value);
+    }
+
+    /// <summary>
+    /// Get value from Unity PlayerPrefs by unique Id
+    /// </summary>
+    /// <param name="id">Unique Id of variable</param>
+    /// <param name="valueDefault">That value will be returned if PlayerPreft not contain provided Id</param>   
+    public static int CacheLoad(this int value, string id, int valueDefault = 0)
+    {
+        return UnityEngine.PlayerPrefs.GetInt(id, valueDefault);
+    }
 }
