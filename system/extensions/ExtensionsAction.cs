@@ -2,6 +2,22 @@
 
 public static class ActionExtensions
 {
+    public static void InvokeIfNotNull<T>(this Action<T, T, T> action, T obj1, T obj2, T obj3)
+    {
+        if (action != null)
+        {
+            action(obj1, obj2, obj3);
+        }
+    }
+
+    public static void InvokeIfNotNull<T>(this Action<T, T> action, T obj1, T obj2)
+    {
+        if (action != null)
+        {
+            action(obj1, obj2);
+        }
+    }
+
     public static void InvokeIfNotNull<T>(this Action<T> action, T obj)
     {
         if (action != null)
