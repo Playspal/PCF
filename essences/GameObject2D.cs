@@ -33,6 +33,14 @@ namespace com.playspal.core.essences
             }
         }
 
+        public float Rotation
+        {
+            get
+            {
+                return _modelTransform.localRotation.eulerAngles.z;
+            }
+        }
+
         public Transform Parent
         {
             get
